@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+import os
 from requests_oauthlib import OAuth1Session
 from bs4 import BeautifulSoup as BS
 import requests
@@ -8,7 +8,7 @@ import urllib
 
 
 
-url='https://www.amazon.co.jp/gp/bestsellers/'
+url='https://www.amazon.co.jp/gp/bestsellers/electronics'
 
 amzn=requests.get(url)
 
@@ -23,11 +23,15 @@ for i in range(0,3):
     rank=amzn_rank[i].text
 
 
-CK = 'MM398XfbkAja63qxUkZrRlTfm'                          # Consumer Key
-CS = 'jrnHuBZDpKwdzYJJZgsN0UHcsXgQjVCSGylYmNIqcZa9x5bStx' # Consumer Secret
-AT = '1463301066-j8YmI61xqIdr7AcLITWbdR3GSY6gYmI2B2s7YCw' # Access Token
-AS = 'dQfnkP0RIBNukwxBdwEigypGCZ9sSkRsEEOVTVApuiCdU'      # Accesss Token Secert
+CK = os.getenv("CK")    # Consumer Key
+CS = os.getenv("CS")    # Consumer Secret
+AT = os.getenv("AT")    # Access Token
+AS = os.getenv("AS")    # Accesss Token Secert
 
+print(CK)
+print(CS)
+print(AT)
+print(AS)
 # ツイート投稿用のURL
 url = "https://api.twitter.com/1.1/statuses/update.json"
 
