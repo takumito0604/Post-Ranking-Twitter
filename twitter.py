@@ -8,7 +8,7 @@ import urllib
 
 
 
-url='https://www.amazon.co.jp/gp/bestsellers/electronics'
+url='https://www.amazon.co.jp/gp/bestsellers/instant-video'
 
 amzn=requests.get(url)
 
@@ -18,20 +18,18 @@ amzn_rank=soup.findAll("div",class_='zg_itemRow')
 
 length=len(amzn_rank)
 
-for i in range(0,3):
+for i in range(2):
 
     rank=amzn_rank[i].text
 
 
-CK = os.getenv("CK")    # Consumer Key
-CS = os.getenv("CS")    # Consumer Secret
-AT = os.getenv("AT")    # Access Token
-AS = os.getenv("AS")    # Accesss Token Secert
 
-print(CK)
-print(CS)
-print(AT)
-print(AS)
+Ck = os.getenv('CK')    # Consumer Key
+Cs = os.getenv('CS')    # Consumer Secret
+At = os.getenv('AT')    # Access Token
+As = os.getenv('AS')    # Accesss Token Secert
+
+
 # ツイート投稿用のURL
 url = "https://api.twitter.com/1.1/statuses/update.json"
 
@@ -39,8 +37,9 @@ url = "https://api.twitter.com/1.1/statuses/update.json"
 params = {"status": rank }
 
 # OAuth認証で POST method で投稿
-twitter = OAuth1Session(CK, CS, AT, AS)
+twitter = OAuth1Session(Ck, Cs, At, As)
 req = twitter.post(url, params = params)
+print(params)
 
 # レスポンスを確認
 if req.status_code == 200:
